@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 2004;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, "public")));
 
