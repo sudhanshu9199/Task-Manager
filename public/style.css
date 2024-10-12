@@ -1,0 +1,442 @@
+body{
+    font-family: 'Roboto', 'Montserrat', sans-serif;
+    background-color: #F5F5DC;
+    color: #2F4F4F;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Task Manager Container */
+#app{
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: rgba(234, 224, 200, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
+}
+
+/* Heading */
+h1{
+    color: #8A9A5B;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* Input and Select */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #8A9A5B;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input:hover, select:hover{
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(255, 223, 186, 0.7);
+}
+
+button{
+    padding: 12px;
+    margin:10px 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Date Input Styling */
+input[type= "date"]{
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #D4AF37;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #2F4F4F;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover effects for Date Input */
+input[type="date"]:hover{
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(255, 223, 186, 0.7);
+}
+
+/* Focus Effects for Date Input */
+input[type="date"]:focus{
+    outline: none;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+    border-color: #D4AF37;
+}
+
+/* Customize the appearance of the calendar dropdown */
+input[type="data"]::-webkit-calendar-picker-indicator{
+    background-color: transparent;
+    color: #D4AF37;
+    cursor: pointer;
+    filter: brightness(1.2); /* Brighten the indicator */
+}
+
+#addTaskButton{
+    background-color: #C4AF37; /* Original:- Sage green primary button, but now :Golden Button */
+    color: white;
+    width: 100%;
+}
+
+button:hover{
+    background-color: #6C7A45; /* Darker shade on hover for interaction */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+li{
+    background-color: rgba(255, 248, 220, 0.9); /* Light beige for tasks with slight transparency*/
+    margin: 10px 0;
+    color: black;
+    padding: 10px;
+    border: 1px solid #8A9A5B; /* Sage green border */
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+}
+
+li:hover{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Overdue Task Styling */
+li.overdue{
+    border: 2px solid #bd0303; /* Brown border for overdue tasks */
+    background-color: rgba(255, 228, 181, 0.8);
+    color: black;
+}
+/* Completed Task Styling */
+ul#taskList li.completed{
+    text-decoration: line-through;
+    color: #ff4d4d;
+    opacity: 0.7;
+}
+
+/* Checkbox Styling */
+ul#taskList li input[type="checkbox"]{
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    vertical-align: middle;
+    margin-right: 10px;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+ul#taskList li input[type="checkbox"]:checked::before{
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 7.5px;
+    width: 6px;
+    height: 12px;
+    border: solid#D4AF37;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+button.edit, button.delete{
+    background-color: rgba(234, 224, 200, 0.8);
+    color: #8B4513;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button.edit:hover, button.delete:hover{
+    background-color: rgba(255, 223, 186, 0.8);
+    box-shadow: 0 0 10px rgba(255, 223, 186, 0.8);
+}
+
+/* Animations */
+#app, h1, input, button, li{
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn{
+    0% {opacity: 0; transform: translateY(10px);}
+    100%{opacity: 1; transform: translateY(0);}
+}
+
+/* Priority-based background colors */
+.high-priority{
+    background-color: rgb(234, 185, 193);
+    color: rgb(215, 82, 10);
+}
+
+.medium-priority{
+    background-color: gray;
+    color: black;
+}
+
+.low-priority{
+    background-color: green;
+    color: white;
+}
+
+.overdue{
+    background-color: red;
+    color: white;
+}
+
+.completed{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Media Queries */
+/* For Desktop */
+@media only screen and (min-width: 1024px){
+    #app{
+        max-width: 800px;
+        padding: 50px;
+    }
+    h1{
+        font-size: 36px;
+    }
+    input, select, button{
+        font-size: 18px;
+        padding: 14px;
+    }
+    li{
+        padding: 20px;
+    }
+}
+
+/* For Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+    #app{
+        max-width: 90%;
+        margin: 30px auto;
+        padding: 30px;
+    }
+    h1{
+        font-size: 30px;
+    }
+
+    input, select, button{
+        font-size: 16px;
+        padding: 12px;
+    }
+    li{
+        padding: 15px;
+    }
+}
+
+/* For Smartphones */
+@media only screen and (max-width: 767px){
+    body{
+        font-family: 'open Sans', sans-serif;
+        background-color: #FAF9F6;
+        color: #4A4A4A;
+        margin: 0;
+        padding: 0;
+    }
+
+    #app{
+        max-width: 95%;
+        margin: 20px auto;
+        background-color: #FFFFFF;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, tranform 0.3s ease;
+    }
+    h1{
+        color: #2F4F4F;
+        font-size: 22px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+    input, select{
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+        border: none;
+        background-color: #F1F1F1;
+        font-size: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    /* Focus state */
+    input:focus, select:focus{
+        outline: none;
+        background-color: #FFF;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Buttons */
+    button{
+        width: 100%;
+        padding: 14px;
+        margin: 12px 0;
+        border-radius: 8px;
+        border: none;
+        background-color: #6C7A45;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button:hover{
+        background-color: #8A9A5B;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+    }
+    li{
+        background-color: #FFFFFF;
+        margin-bottom: 15px;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    li:hover{
+        transform: scale(1.03);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    li.completed{
+        text-decoration: line-through;
+        color: #C4AF37;
+        opacity: 0.7;
+    }
+    li.overdue{
+        background-color: #FFE6E6;
+        border-left: 5px solid #FF6B6B;
+    }
+
+    input[type="checkbox"]{
+        appearance: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        display: flex;
+        cursor: pointer;
+        position: relative;
+        border: 2px solid #4A4A4A;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input[type="checkbox"]::before{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: transparent;
+    }
+
+    input[type="checkbox"]:checked::before{
+        content: '\2713';
+        color: #6C7A45;
+        font-size: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button.edit, button.delete{
+        background-color: #EDEDED;
+        color: #6C7A45;
+        border: none;
+        font-size: 12px;
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    button.edit:hover, button.delete:hover{
+        background-color: #D4AF37;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Priority-based background colors */
+.high-priority{
+    background-color: rgb(234, 185, 193);
+    color: rgb(215, 82, 10);
+}
+
+.medium-priority{
+    background-color: gray;
+    color: black;
+}
+
+.low-priority{
+    background-color: green;
+    color: white;
+}
+
+.overdue{
+    background-color: red;
+    color: white;
+}
+
+.completed{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+    #app, h1, input, button, li{
+        opacity: 0;
+        animation: fadeInMobile 0.8s ease forwards;
+    }
+
+    @keyframes fadeInMobile {
+        0%{opacity: 0; transform: translateY(10px);}
+        100%{opacity: 1; transform: translateY(0);}
+    }
+}
